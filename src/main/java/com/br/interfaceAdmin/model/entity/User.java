@@ -27,7 +27,7 @@ public class User {
     private String password;
 
     @NotBlank
-    @Column(nullable = false, unique = true)
+    @Column(length = 11, nullable = false, unique = true)
     private String cpf;
 
     @NotBlank

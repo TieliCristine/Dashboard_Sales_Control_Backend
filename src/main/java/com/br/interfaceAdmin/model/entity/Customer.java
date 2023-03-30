@@ -27,10 +27,10 @@ public class Customer {
     private Date birthdate;
 
     @NotNull
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     private Address address;
 
     @NotNull
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     private PersonalData personalData;
 }

@@ -25,10 +25,10 @@ public class Supplier {
     private String salesRepresentative;
 
     @NotNull
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     private Address address;
 
     @NotNull
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     private PersonalData personalData;
 }
