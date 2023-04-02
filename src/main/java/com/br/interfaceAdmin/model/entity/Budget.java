@@ -21,11 +21,6 @@ public class Budget {
     private long quantity;
 
     @NotNull
-    @Pattern(regexp = "PENDING|PROGRESSING|AUTHORIZED|CONCLUDED|DELIVERED")
-    @Column(nullable = false)
-    private Status status;
-
-    @NotNull
     @ManyToOne
     private Customer customer;
 
@@ -37,4 +32,9 @@ public class Budget {
     @ManyToOne
     @JoinColumn(name = "produto", nullable = false)
     private Product product;
+
+    @NotNull
+    @Pattern(regexp = "PENDING|PROGRESSING|AUTHORIZED|CONCLUDED|DELIVERED")
+    @Column(nullable = false)
+    private Status status;
 }
