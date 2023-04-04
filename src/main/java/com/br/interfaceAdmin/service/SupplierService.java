@@ -20,19 +20,19 @@ public class SupplierService {
         this.supplierRepository = supplierRepository;
     }
 
-    private List<Supplier> list() {
+    public List<Supplier> list() {
         return supplierRepository.findAll();
     }
 
-    private Supplier findById(@NotNull @Positive Long id) {
+    public Supplier findById(@NotNull @Positive Long id) {
         return supplierRepository.findById(id).orElseThrow();
     }
 
-    private Supplier save(@Valid Supplier supplier) {
+    public Supplier save(@Valid Supplier supplier) {
         return supplierRepository.save(supplier);
     }
 
-    private Supplier update(@NotNull @Positive Long id, @Valid Supplier supplier) {
+    public Supplier update(@NotNull @Positive Long id, @Valid Supplier supplier) {
         return supplierRepository.findById(id)
                 .map(recordFound -> {
                     recordFound.setCorporativeName(supplier.getCorporativeName());
@@ -43,7 +43,7 @@ public class SupplierService {
                 }).orElseThrow();
     }
 
-    private void delete(@NotNull @Positive Long id) {
+    public void delete(@NotNull @Positive Long id) {
         supplierRepository.delete(supplierRepository.findById(id).orElseThrow());
     }
 }

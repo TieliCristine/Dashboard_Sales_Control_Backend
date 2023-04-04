@@ -45,8 +45,4 @@ public class AddressService {
                     return addressRepository.save(recordFound);
                 }).orElseThrow();
     }
-
-    public void delete(@NotNull @Positive Long id){
-        addressRepository.delete(addressRepository.findById(id).orElseThrow());
-    }
 }

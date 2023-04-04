@@ -20,19 +20,19 @@ public class PersonalDataService {
         this.personalDataRepository = personalDataRepository;
     }
 
-    private List<PersonalData> list() {
+    public List<PersonalData> list() {
         return personalDataRepository.findAll();
     }
 
-    private PersonalData findById(@NotNull @Positive Long id) {
+    public PersonalData findById(@NotNull @Positive Long id) {
         return personalDataRepository.findById(id).orElseThrow();
     }
 
-    private PersonalData save(@Valid PersonalData personalData) {
+    public PersonalData save(@Valid PersonalData personalData) {
         return personalDataRepository.save(personalData);
     }
 
-    private PersonalData update(@NotNull @Positive Long id, @Valid PersonalData personalData) {
+    public PersonalData update(@NotNull @Positive Long id, @Valid PersonalData personalData) {
         return personalDataRepository.findById(id)
                 .map(recordFound -> {
                     recordFound.setCpf(personalData.getCpf());
@@ -41,9 +41,5 @@ public class PersonalDataService {
                     recordFound.setEmail(personalData.getEmail());
                     return personalDataRepository.save(recordFound);
                 }).orElseThrow();
-    }
-
-    private void delete(@NotNull @Positive Long id) {
-        personalDataRepository.delete(personalDataRepository.findById(id).orElseThrow());
     }
 }

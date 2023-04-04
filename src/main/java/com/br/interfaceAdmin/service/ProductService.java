@@ -20,19 +20,19 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    private List<Product> list(){
+    public List<Product> list(){
         return productRepository.findAll();
     }
 
-    private Product findById(@NotNull @Positive Long id){
+    public Product findById(@NotNull @Positive Long id){
         return productRepository.findById(id).orElseThrow();
     }
 
-    private Product save(@Valid Product product){
+    public Product save(@Valid Product product){
         return productRepository.save(product);
     }
 
-    private Product update(@NotNull @Positive Long id, @Valid Product product){
+    public Product update(@NotNull @Positive Long id, @Valid Product product){
         return productRepository.findById(id)
                 .map(recordFound -> {
                     recordFound.setDescription(product.getDescription());
@@ -40,7 +40,7 @@ public class ProductService {
                 }).orElseThrow();
     }
 
-    private void delete(@NotNull @Positive Long id){
+    public void delete(@NotNull @Positive Long id){
         productRepository.delete(productRepository.findById(id).orElseThrow());
     }
 }

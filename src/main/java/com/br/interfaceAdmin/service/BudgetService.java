@@ -20,19 +20,19 @@ public class BudgetService {
         this.budgetRepository = budgetRepository;
     }
 
-    private List<Budget> list(){
+    public List<Budget> list(){
         return budgetRepository.findAll();
     }
 
-    private Budget findById(@NotNull @Positive Long id){
+    public Budget findById(@NotNull @Positive Long id){
         return budgetRepository.findById(id).orElseThrow();
     }
 
-    private Budget save(@Valid Budget budget){
+    public Budget save(@Valid Budget budget){
         return budgetRepository.save(budget);
     }
 
-    private Budget update(@NotNull @Positive Long id, @Valid Budget budget){
+    public Budget update(@NotNull @Positive Long id, @Valid Budget budget){
         return budgetRepository.findById(id)
                 .map(recordFound -> {
                     recordFound.setQuantity(budget.getQuantity());
@@ -44,7 +44,7 @@ public class BudgetService {
                 }).orElseThrow();
     }
 
-    private void delete(@NotNull @Positive Long id){
+    public void delete(@NotNull @Positive Long id){
         budgetRepository.delete(budgetRepository.findById(id)
                 .orElseThrow());
     }

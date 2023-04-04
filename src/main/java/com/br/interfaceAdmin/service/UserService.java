@@ -20,19 +20,19 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    private List<User> list(){
+    public List<User> list(){
         return userRepository.findAll();
     }
 
-    private User findById(@NotNull @Positive Long id){
+    public User findById(@NotNull @Positive Long id){
         return userRepository.findById(id).orElseThrow();
     }
 
-    private User save(@Valid User user){
+    public User save(@Valid User user){
         return userRepository.save(user);
     }
 
-    private User update(@NotNull @Positive Long id, @Valid User user){
+    public User update(@NotNull @Positive Long id, @Valid User user){
         return userRepository.findById(id)
                 .map(recordFound -> {
                     recordFound.setEmail(user.getEmail());
@@ -45,7 +45,7 @@ public class UserService {
                 }).orElseThrow();
     }
 
-    private void delete(@NotNull @Positive Long id){
+    public void delete(@NotNull @Positive Long id){
         userRepository.delete(userRepository.findById(id).orElseThrow());
     }
 }
