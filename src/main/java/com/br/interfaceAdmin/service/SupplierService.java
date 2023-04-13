@@ -1,5 +1,6 @@
 package com.br.interfaceAdmin.service;
 
+import com.br.interfaceAdmin.model.entity.PersonalData;
 import com.br.interfaceAdmin.model.entity.Supplier;
 import com.br.interfaceAdmin.model.repository.SupplierRepository;
 import jakarta.validation.Valid;
@@ -28,7 +29,11 @@ public class SupplierService {
         return supplierRepository.findById(id).orElseThrow();
     }
 
-    public Supplier save(@Valid Supplier supplier) {
+    public Supplier save(@Valid Supplier supplier){
+        PersonalData personalData = supplier.getPersonalData();
+        if (!personalData.hasCpfOrCnpj()) {
+            throw new IllegalArgumentException("PersonalData must have at least cpf or cnpj filled");
+        }
         return supplierRepository.save(supplier);
     }
 

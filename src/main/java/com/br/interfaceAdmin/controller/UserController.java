@@ -1,19 +1,24 @@
-package com.br.interfaceAdmin.Controller;
+package com.br.interfaceAdmin.controller;
 
+import com.br.interfaceAdmin.dto.AccessDto;
+import com.br.interfaceAdmin.dto.UserDto;
 import com.br.interfaceAdmin.model.entity.User;
 import com.br.interfaceAdmin.service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Validated
 @RestController
 @RequestMapping("api/user")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     private final UserService userService;
@@ -33,8 +38,15 @@ public class UserController {
     }
 
     @PostMapping
-    public User save(@RequestBody @Valid User user){
-        return userService.save(user);
+    public ResponseEntity<User> save(@RequestBody @Valid UserDto userDto){
+        User user = userService.save(userDto);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/authenticate")
+    public ResponseEntity<User> authenticationAccess(@RequestBody @Valid AccessDto accessDto){
+        User user = userService.check(accessDto);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}")

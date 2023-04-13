@@ -1,6 +1,7 @@
 package com.br.interfaceAdmin.service;
 
 import com.br.interfaceAdmin.model.entity.Customer;
+import com.br.interfaceAdmin.model.entity.PersonalData;
 import com.br.interfaceAdmin.model.repository.CustomerRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -29,6 +30,10 @@ public class CustomerService {
     }
 
     public Customer save(@Valid Customer customer) {
+        PersonalData personalData = customer.getPersonalData();
+        if (!personalData.hasCpfOrCnpj()){
+            throw new IllegalArgumentException("PersonalData must have at least cpf or cnpj filled");
+        }
         return customerRepository.save(customer);
     }
 

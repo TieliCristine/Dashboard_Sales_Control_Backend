@@ -15,11 +15,9 @@ public class PersonalData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank
     @Column(length = 11, unique = true)
     private String cpf;
 
-    @NotBlank
     @Column(length = 15, unique = true)
     private String cnpj;
 
@@ -30,4 +28,8 @@ public class PersonalData {
     @NotBlank
     @Column(nullable = false)
     private String email;
+
+    public boolean hasCpfOrCnpj() {
+        return cpf != null || cnpj != null;
+    }
 }

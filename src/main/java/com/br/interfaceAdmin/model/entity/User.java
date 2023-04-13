@@ -40,5 +40,9 @@ public class User {
 
     @NotBlank
     @Column(nullable = false)
-    private String cargo;
+    private String jobPosition;
+
+    @NotNull
+    @Column(nullable = false)
+    private AccessLvl accessLvl;
 }

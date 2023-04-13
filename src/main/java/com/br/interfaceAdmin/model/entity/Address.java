@@ -18,7 +18,7 @@ public class Address {
     @NotBlank
     private String street;
     @NotBlank
-    private int number;
+    private String number;
     private String supplemental;
     @NotBlank
     private String district;

@@ -1,7 +1,13 @@
 package com.br.interfaceAdmin.service;
 
-import com.br.interfaceAdmin.model.entity.Budget;
+import com.br.interfaceAdmin.dto.BudgetDto;
+import com.br.interfaceAdmin.dto.CustomerDto;
+import com.br.interfaceAdmin.model.entity.*;
 import com.br.interfaceAdmin.model.repository.BudgetRepository;
+import com.br.interfaceAdmin.model.repository.CustomerRepository;
+import com.br.interfaceAdmin.model.repository.ProductRepository;
+import com.br.interfaceAdmin.model.repository.SupplierRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.jetbrains.annotations.NotNull;
@@ -15,9 +21,19 @@ import java.util.List;
 public class BudgetService {
 
     private final BudgetRepository budgetRepository;
+    private final CustomerRepository customerRepository;
+    private final SupplierRepository supplierRepository;
+    private final ProductRepository productRepository;
 
-    public BudgetService(BudgetRepository budgetRepository) {
+    public BudgetService(BudgetRepository budgetRepository,
+                         CustomerRepository customerRepository,
+                         SupplierRepository supplierRepository,
+                         ProductRepository productRepository
+    ) {
         this.budgetRepository = budgetRepository;
+        this.customerRepository = customerRepository;
+        this.supplierRepository = supplierRepository;
+        this.productRepository = productRepository;
     }
 
     public List<Budget> list(){
@@ -29,6 +45,17 @@ public class BudgetService {
     }
 
     public Budget save(@Valid Budget budget){
+        return budgetRepository.save(budget);
+    }
+
+    public Budget createBudget(@Valid BudgetDto budgetDto) {
+        Budget budget = new Budget();
+        budget.setCustomer(budgetDto.getCustomer());
+        budget.setSupplier(budgetDto.getSupplier());
+        budget.setProduct(budgetDto.getProduct());
+        budget.setQuantity(budgetDto.getQuantity());
+        budget.setStatus(Status.PENDING);
+
         return budgetRepository.save(budget);
     }
 

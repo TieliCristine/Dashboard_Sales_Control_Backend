@@ -1,4 +1,4 @@
-package com.br.interfaceAdmin.Controller;
+package com.br.interfaceAdmin.controller;
 
 import com.br.interfaceAdmin.model.entity.Supplier;
 import com.br.interfaceAdmin.service.SupplierService;

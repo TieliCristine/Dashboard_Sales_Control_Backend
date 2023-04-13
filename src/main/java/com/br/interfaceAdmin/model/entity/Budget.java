@@ -2,7 +2,6 @@ package com.br.interfaceAdmin.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,11 +29,10 @@ public class Budget {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "produto", nullable = false)
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @NotNull
-    @Pattern(regexp = "PENDING|PROGRESSING|AUTHORIZED|CONCLUDED|DELIVERED")
     @Column(nullable = false)
     private Status status;
 }

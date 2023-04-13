@@ -1,11 +1,13 @@
-package com.br.interfaceAdmin.Controller;
+package com.br.interfaceAdmin.controller;
 
+import com.br.interfaceAdmin.dto.BudgetDto;
 import com.br.interfaceAdmin.model.entity.Budget;
 import com.br.interfaceAdmin.service.BudgetService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,10 +35,16 @@ public class BudgetController {
     }
 
     @PostMapping
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public Budget save(@RequestBody @Valid Budget budget){
-        return budgetService.save(budget);
+    public ResponseEntity<Budget> createBudget(@Valid @RequestBody BudgetDto budgetDto) {
+        Budget budget = budgetService.createBudget(budgetDto);
+        return ResponseEntity.ok(budget);
     }
+
+//    @PostMapping
+//    @ResponseStatus(code = HttpStatus.CREATED)
+//    public Budget save(@RequestBody @Valid Budget budget){
+//        return budgetService.save(budget);
+//    }
 
     @PutMapping(value = "/{id}")
     public Budget update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Budget budget){
