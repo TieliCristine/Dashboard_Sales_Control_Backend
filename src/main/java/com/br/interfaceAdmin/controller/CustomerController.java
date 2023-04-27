@@ -1,11 +1,13 @@
 package com.br.interfaceAdmin.controller;
 
+import com.br.interfaceAdmin.dto.CustomerDto;
 import com.br.interfaceAdmin.model.entity.Customer;
 import com.br.interfaceAdmin.service.CustomerService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,7 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("api/customer")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -33,9 +36,9 @@ public class CustomerController {
     }
 
     @PostMapping
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public Customer save(@RequestBody @Valid Customer customer){
-        return customerService.save(customer);
+    public ResponseEntity<Customer> save(@RequestBody @Valid CustomerDto customerDto){
+        Customer customer = customerService.save(customerDto);
+        return new ResponseEntity<>(customer, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")

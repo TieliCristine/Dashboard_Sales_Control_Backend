@@ -13,6 +13,7 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("api/personalData")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PersonalDataController {
 
     private final PersonalDataService personalDataService;

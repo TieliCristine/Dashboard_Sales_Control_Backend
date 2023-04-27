@@ -1,11 +1,13 @@
 package com.br.interfaceAdmin.service;
 
+import com.br.interfaceAdmin.dto.CustomerDto;
 import com.br.interfaceAdmin.model.entity.Customer;
 import com.br.interfaceAdmin.model.entity.PersonalData;
 import com.br.interfaceAdmin.model.repository.CustomerRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -16,9 +18,11 @@ import java.util.List;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final ModelMapper modelMapper;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, ModelMapper modelMapper) {
         this.customerRepository = customerRepository;
+        this.modelMapper = modelMapper;
     }
 
     public List<Customer> list() {
@@ -29,7 +33,8 @@ public class CustomerService {
         return customerRepository.findById(id).orElseThrow();
     }
 
-    public Customer save(@Valid Customer customer) {
+    public Customer save(@Valid CustomerDto customerDto) {
+        Customer customer = modelMapper.map(customerDto, Customer.class);
         PersonalData personalData = customer.getPersonalData();
         if (!personalData.hasCpfOrCnpj()){
             throw new IllegalArgumentException("PersonalData must have at least cpf or cnpj filled");

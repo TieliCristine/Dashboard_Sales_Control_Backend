@@ -14,6 +14,7 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("api/supplier")
+@CrossOrigin(origins = "http://localhost:4200")
 public class SupplierController {
 
     private final SupplierService supplierService;

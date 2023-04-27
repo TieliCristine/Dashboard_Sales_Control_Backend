@@ -18,7 +18,7 @@ public class PersonalData {
     @Column(length = 11, unique = true)
     private String cpf;
 
-    @Column(length = 15, unique = true)
+    @Column(length = 14, unique = true)
     private String cnpj;
 
     @NotBlank
