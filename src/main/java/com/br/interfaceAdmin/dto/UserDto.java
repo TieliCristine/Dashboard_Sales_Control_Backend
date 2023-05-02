@@ -1,5 +1,6 @@
 package com.br.interfaceAdmin.dto;
 
+import com.br.interfaceAdmin.model.entity.AccessLvl;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -30,4 +31,7 @@ public class UserDto {
 
     @NotBlank(message = "{jobPosition.not.blank}")
     private String jobPosition;
+
+    @NotNull(message = "{accessLvl.not.null}")
+    private AccessLvl accessLvl;
 }

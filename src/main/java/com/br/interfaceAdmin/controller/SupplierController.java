@@ -1,5 +1,6 @@
 package com.br.interfaceAdmin.controller;
 
+import com.br.interfaceAdmin.dto.SupplierDto;
 import com.br.interfaceAdmin.model.entity.Supplier;
 import com.br.interfaceAdmin.service.SupplierService;
 import jakarta.validation.Valid;
@@ -35,11 +36,11 @@ public class SupplierController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Supplier save(@RequestBody @Valid Supplier supplier){
-        return supplierService.save(supplier);
+    public Supplier save(@RequestBody @Valid SupplierDto supplierDto){
+        return supplierService.save(supplierDto);
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/id/{id}")
     public Supplier update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Supplier supplier){
         return supplierService.update(id, supplier);
     }

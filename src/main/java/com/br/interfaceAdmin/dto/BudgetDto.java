@@ -16,6 +16,8 @@ public class BudgetDto {
     @Positive(message = "{quantity.not.negative}")
     private long quantity;
 
+    private double finalPrice;
+
     @NotNull(message = "{customer.not.null}")
     private Customer customer;
 

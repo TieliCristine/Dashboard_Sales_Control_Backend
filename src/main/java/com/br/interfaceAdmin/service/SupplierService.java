@@ -1,11 +1,14 @@
 package com.br.interfaceAdmin.service;
 
+import com.br.interfaceAdmin.dto.SupplierDto;
+import com.br.interfaceAdmin.model.entity.CompareCpfAndCnpj;
 import com.br.interfaceAdmin.model.entity.PersonalData;
 import com.br.interfaceAdmin.model.entity.Supplier;
 import com.br.interfaceAdmin.model.repository.SupplierRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.jetbrains.annotations.NotNull;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -16,9 +19,13 @@ import java.util.List;
 public class SupplierService {
 
     private final SupplierRepository supplierRepository;
+    private final ModelMapper modelMapper;
+    private final CompareCpfAndCnpj compareCpfAndCnpj;
 
-    public SupplierService(SupplierRepository supplierRepository) {
+    public SupplierService(SupplierRepository supplierRepository, ModelMapper modelMapper, CompareCpfAndCnpj compareCpfAndCnpj) {
         this.supplierRepository = supplierRepository;
+        this.modelMapper = modelMapper;
+        this.compareCpfAndCnpj = compareCpfAndCnpj;
     }
 
     public List<Supplier> list() {
@@ -29,9 +36,10 @@ public class SupplierService {
         return supplierRepository.findById(id).orElseThrow();
     }
 
-    public Supplier save(@Valid Supplier supplier){
+    public Supplier save(@Valid SupplierDto supplierDto){
+        Supplier supplier = modelMapper.map(supplierDto, Supplier.class);
         PersonalData personalData = supplier.getPersonalData();
-        if (!personalData.hasCpfOrCnpj()) {
+        if (personalData.hasCpfOrCnpj()) {
             throw new IllegalArgumentException("PersonalData must have at least cpf or cnpj filled");
         }
         return supplierRepository.save(supplier);
@@ -43,7 +51,18 @@ public class SupplierService {
                     recordFound.setCorporativeName(supplier.getCorporativeName());
                     recordFound.setSalesRepresentative(supplier.getSalesRepresentative());
                     recordFound.setAddress(supplier.getAddress());
-                    recordFound.setPersonalData(supplier.getPersonalData());
+                    String recordFoundCpf = recordFound.getPersonalData().getCpf();
+                    String receivedCpf = supplier.getPersonalData().getCpf();
+                    if (this.compareCpfAndCnpj.compareCpf(recordFoundCpf, receivedCpf)) {
+                        recordFound.getPersonalData().setCpf(supplier.getPersonalData().getCpf());
+                    }
+                    String recordFoundCnpj = recordFound.getPersonalData().getCnpj();
+                    String receivedCnpj = supplier.getPersonalData().getCnpj();
+                    if (this.compareCpfAndCnpj.compareCnpj(recordFoundCnpj, receivedCnpj)) {
+                        recordFound.getPersonalData().setCnpj(supplier.getPersonalData().getCnpj());
+                    }
+                    recordFound.getPersonalData().setPhone(supplier.getPersonalData().getPhone());
+                    recordFound.getPersonalData().setEmail(supplier.getPersonalData().getEmail());
                     return supplierRepository.save(recordFound);
                 }).orElseThrow();
     }

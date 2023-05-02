@@ -39,7 +39,7 @@ public class UserService {
     public User save(@Valid UserDto userDto){
         User user = modelMapper.map(userDto, User.class);
 //        if (requestingUser.getAccessLvl() != AccessLvl.ADMIN) {
-            user.setAccessLvl(AccessLvl.LOW);
+//            user.setAccessLvl(AccessLvl.LOW);
 //        }
         return userRepository.save(user);
     }

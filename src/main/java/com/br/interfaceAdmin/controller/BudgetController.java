@@ -47,7 +47,7 @@ public class BudgetController {
 //        return budgetService.save(budget);
 //    }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/id/{id}")
     public Budget update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Budget budget){
         return budgetService.update(id, budget);
     }

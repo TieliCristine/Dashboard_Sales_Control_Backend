@@ -1,8 +1,8 @@
 package com.br.interfaceAdmin.model.entity;
 
 public enum AccessLvl {
-    LOW,
-    MEDIUM,
-    HIGH,
+    BAIXO,
+    MEDIO,
+    ALTO,
     ADMIN
 }

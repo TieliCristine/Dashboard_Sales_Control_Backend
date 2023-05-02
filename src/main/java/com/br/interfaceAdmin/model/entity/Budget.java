@@ -19,6 +19,8 @@ public class Budget {
     @Column(nullable = false)
     private long quantity;
 
+    private double finalPrice;
+
     @NotNull
     @ManyToOne
     private Customer customer;

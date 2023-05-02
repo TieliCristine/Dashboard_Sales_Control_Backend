@@ -39,7 +39,7 @@ public class ProductController {
         return productService.save(product);
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/id/{id}")
     public Product update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Product product){
         return productService.update(id, product);
     }

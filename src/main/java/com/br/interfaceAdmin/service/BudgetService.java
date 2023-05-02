@@ -1,16 +1,15 @@
 package com.br.interfaceAdmin.service;
 
 import com.br.interfaceAdmin.dto.BudgetDto;
-import com.br.interfaceAdmin.dto.CustomerDto;
 import com.br.interfaceAdmin.model.entity.*;
 import com.br.interfaceAdmin.model.repository.BudgetRepository;
 import com.br.interfaceAdmin.model.repository.CustomerRepository;
 import com.br.interfaceAdmin.model.repository.ProductRepository;
 import com.br.interfaceAdmin.model.repository.SupplierRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.jetbrains.annotations.NotNull;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -24,16 +23,18 @@ public class BudgetService {
     private final CustomerRepository customerRepository;
     private final SupplierRepository supplierRepository;
     private final ProductRepository productRepository;
+    private final ModelMapper modelMapper;
 
     public BudgetService(BudgetRepository budgetRepository,
                          CustomerRepository customerRepository,
                          SupplierRepository supplierRepository,
-                         ProductRepository productRepository
-    ) {
+                         ProductRepository productRepository,
+                         ModelMapper modelMapper) {
         this.budgetRepository = budgetRepository;
         this.customerRepository = customerRepository;
         this.supplierRepository = supplierRepository;
         this.productRepository = productRepository;
+        this.modelMapper = modelMapper;
     }
 
     public List<Budget> list(){
@@ -49,12 +50,8 @@ public class BudgetService {
     }
 
     public Budget createBudget(@Valid BudgetDto budgetDto) {
-        Budget budget = new Budget();
-        budget.setCustomer(budgetDto.getCustomer());
-        budget.setSupplier(budgetDto.getSupplier());
-        budget.setProduct(budgetDto.getProduct());
-        budget.setQuantity(budgetDto.getQuantity());
-        budget.setStatus(Status.PENDING);
+        Budget budget = this.modelMapper.map(budgetDto, Budget.class);
+
 
         return budgetRepository.save(budget);
     }

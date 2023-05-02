@@ -35,7 +35,9 @@ public class ProductService {
     public Product update(@NotNull @Positive Long id, @Valid Product product){
         return productRepository.findById(id)
                 .map(recordFound -> {
+                    recordFound.setName(product.getName());
                     recordFound.setDescription(product.getDescription());
+                    recordFound.setPrice(product.getPrice());
                     return productRepository.save(recordFound);
                 }).orElseThrow();
     }

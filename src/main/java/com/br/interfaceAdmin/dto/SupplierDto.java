@@ -24,12 +24,4 @@ public class SupplierDto {
 
     @NotBlank(message = "{personalData.not.blank}")
     private PersonalData personalData;
-
-    public SupplierDto(Supplier supplier) {
-        this.id = supplier.getId();
-        this.corporativeName = supplier.getCorporativeName();
-        this.salesRepresentative = supplier.getSalesRepresentative();
-        this.address = supplier.getAddress();
-        this.personalData = supplier.getPersonalData();
-    }
 }

@@ -30,6 +30,6 @@ public class PersonalData {
     private String email;
 
     public boolean hasCpfOrCnpj() {
-        return cpf != null || cnpj != null;
+        return cpf == null && cnpj == null;
     }
 }
