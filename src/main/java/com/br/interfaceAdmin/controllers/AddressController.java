@@ -1,14 +1,13 @@
-package com.br.interfaceAdmin.controller;
+package com.br.interfaceAdmin.controllers;
 
 import com.br.interfaceAdmin.model.entity.Address;
-import com.br.interfaceAdmin.service.AddressService;
+import com.br.interfaceAdmin.services.AddressService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("api/address")
-@CrossOrigin(origins = "http://localhost:4200")
 public class AddressController {
 
     private final AddressService addressService;

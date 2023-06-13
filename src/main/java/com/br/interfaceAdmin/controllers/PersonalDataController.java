@@ -1,7 +1,7 @@
-package com.br.interfaceAdmin.controller;
+package com.br.interfaceAdmin.controllers;
 
 import com.br.interfaceAdmin.model.entity.PersonalData;
-import com.br.interfaceAdmin.service.PersonalDataService;
+import com.br.interfaceAdmin.services.PersonalDataService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.jetbrains.annotations.NotNull;
@@ -13,7 +13,6 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("api/personalData")
-@CrossOrigin(origins = "http://localhost:4200")
 public class PersonalDataController {
 
     private final PersonalDataService personalDataService;

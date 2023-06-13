@@ -1,8 +1,8 @@
-package com.br.interfaceAdmin.controller;
+package com.br.interfaceAdmin.controllers;
 
 import com.br.interfaceAdmin.dto.BudgetDto;
 import com.br.interfaceAdmin.model.entity.Budget;
-import com.br.interfaceAdmin.service.BudgetService;
+import com.br.interfaceAdmin.services.BudgetService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.jetbrains.annotations.NotNull;
@@ -16,7 +16,6 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("api/budget")
-@CrossOrigin(origins = "http://localhost:4200")
 public class BudgetController {
 
     private final BudgetService budgetService;

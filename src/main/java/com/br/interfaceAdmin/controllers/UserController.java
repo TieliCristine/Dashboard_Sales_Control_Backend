@@ -1,9 +1,10 @@
-package com.br.interfaceAdmin.controller;
+package com.br.interfaceAdmin.controllers;
 
 import com.br.interfaceAdmin.dto.AccessDto;
 import com.br.interfaceAdmin.dto.UserDto;
 import com.br.interfaceAdmin.model.entity.User;
-import com.br.interfaceAdmin.service.UserService;
+import com.br.interfaceAdmin.model.projection.UserProjection;
+import com.br.interfaceAdmin.services.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +18,6 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("api/user")
-@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     private final UserService userService;
@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping
-    public @ResponseBody List<User> list(){
+    public @ResponseBody List<UserProjection> list(){
         return userService.list();
     }
 

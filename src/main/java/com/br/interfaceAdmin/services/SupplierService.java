@@ -1,4 +1,4 @@
-package com.br.interfaceAdmin.service;
+package com.br.interfaceAdmin.services;
 
 import com.br.interfaceAdmin.dto.SupplierDto;
 import com.br.interfaceAdmin.model.entity.CompareCpfAndCnpj;

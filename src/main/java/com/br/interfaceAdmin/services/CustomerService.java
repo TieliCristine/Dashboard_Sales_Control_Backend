@@ -1,4 +1,4 @@
-package com.br.interfaceAdmin.service;
+package com.br.interfaceAdmin.services;
 
 import com.br.interfaceAdmin.dto.CustomerDto;
 import com.br.interfaceAdmin.model.entity.CompareCpfAndCnpj;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
-import java.util.Objects;
 
 @Validated
 @Service

@@ -1,8 +1,8 @@
-package com.br.interfaceAdmin.controller;
+package com.br.interfaceAdmin.controllers;
 
 import com.br.interfaceAdmin.dto.CustomerDto;
 import com.br.interfaceAdmin.model.entity.Customer;
-import com.br.interfaceAdmin.service.CustomerService;
+import com.br.interfaceAdmin.services.CustomerService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.jetbrains.annotations.NotNull;
@@ -16,7 +16,6 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("api/customer")
-@CrossOrigin(origins = "http://localhost:4200")
 public class CustomerController {
 
     private final CustomerService customerService;

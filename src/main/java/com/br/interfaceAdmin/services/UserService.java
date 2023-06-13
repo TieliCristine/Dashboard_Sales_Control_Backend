@@ -1,9 +1,9 @@
-package com.br.interfaceAdmin.service;
+package com.br.interfaceAdmin.services;
 
 import com.br.interfaceAdmin.dto.AccessDto;
 import com.br.interfaceAdmin.dto.UserDto;
-import com.br.interfaceAdmin.model.entity.AccessLvl;
 import com.br.interfaceAdmin.model.entity.User;
+import com.br.interfaceAdmin.model.projection.UserProjection;
 import com.br.interfaceAdmin.model.repository.UserRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -28,8 +28,8 @@ public class UserService {
         this.modelMapper = modelMapper;
     }
 
-    public List<User> list(){
-        return userRepository.findAll();
+    public List<UserProjection> list(){
+        return userRepository.findAllProjectedBy();
     }
 
     public User findById(@NotNull @Positive Long id){

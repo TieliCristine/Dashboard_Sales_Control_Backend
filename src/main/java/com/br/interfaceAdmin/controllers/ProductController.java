@@ -1,7 +1,7 @@
-package com.br.interfaceAdmin.controller;
+package com.br.interfaceAdmin.controllers;
 
 import com.br.interfaceAdmin.model.entity.Product;
-import com.br.interfaceAdmin.service.ProductService;
+import com.br.interfaceAdmin.services.ProductService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +14,6 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("api/product")
-@CrossOrigin(origins = "http://localhost:4200")
 public class ProductController {
 
     private final ProductService productService;

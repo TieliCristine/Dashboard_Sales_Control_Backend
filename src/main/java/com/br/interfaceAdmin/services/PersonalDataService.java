@@ -1,4 +1,4 @@
-package com.br.interfaceAdmin.service;
+package com.br.interfaceAdmin.services;
 
 import com.br.interfaceAdmin.model.entity.PersonalData;
 import com.br.interfaceAdmin.model.repository.PersonalDataRepository;
