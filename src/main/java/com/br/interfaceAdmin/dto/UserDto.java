@@ -1,8 +1,7 @@
 package com.br.interfaceAdmin.dto;
 
-import com.br.interfaceAdmin.model.entity.AccessLvl;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import com.br.interfaceAdmin.enumeration.AccessLvl;
+import com.br.interfaceAdmin.model.entity.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,25 +12,20 @@ import java.util.Date;
 public class UserDto {
 
     private long id;
-
-    @NotBlank(message = "{email.not.blank}")
     private String email;
-
-    @NotBlank(message = "{password.not.blank}")
-    private String password;
-
-    @NotBlank(message = "{cpf.not.blank}")
     private String cpf;
-
-    @NotBlank(message = "{name.not.blank}")
     private String name;
-
-    @NotNull(message = "{birthdate.not.null}")
     private Date birthdate;
-
-    @NotBlank(message = "{jobPosition.not.blank}")
     private String jobPosition;
-
-    @NotNull(message = "{accessLvl.not.null}")
     private AccessLvl accessLvl;
+
+    public UserDto(User user) {
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.cpf = user.getCpf();
+        this.name = user.getName();
+        this.birthdate = user.getBirthdate();
+        this.jobPosition = user.getJobPosition();
+        this.accessLvl = user.getAccessLvl();
+    }
 }

@@ -1,5 +1,6 @@
 package com.br.interfaceAdmin.model.entity;
 
+import com.br.interfaceAdmin.enumeration.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

@@ -1,5 +1,6 @@
 package com.br.interfaceAdmin.dto;
 
+import com.br.interfaceAdmin.enumeration.Status;
 import com.br.interfaceAdmin.model.entity.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

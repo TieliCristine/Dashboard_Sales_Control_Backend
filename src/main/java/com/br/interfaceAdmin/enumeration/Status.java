@@ -1,4 +1,4 @@
-package com.br.interfaceAdmin.model.entity;
+package com.br.interfaceAdmin.enumeration;
 
 public enum Status {
     PENDING,

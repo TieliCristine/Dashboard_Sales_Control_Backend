@@ -2,6 +2,7 @@ package com.br.interfaceAdmin.services;
 
 import com.br.interfaceAdmin.dto.AccessDto;
 import com.br.interfaceAdmin.dto.UserDto;
+import com.br.interfaceAdmin.exception.AccountNotFoundException;
 import com.br.interfaceAdmin.model.entity.User;
 import com.br.interfaceAdmin.model.projection.UserProjection;
 import com.br.interfaceAdmin.model.repository.UserRepository;
@@ -36,6 +37,10 @@ public class UserService {
         return userRepository.findById(id).orElseThrow();
     }
 
+    public Optional<User> findByEmailAndPassword(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password);
+    }
+
     public User save(@Valid UserDto userDto){
         User user = modelMapper.map(userDto, User.class);
 //        if (requestingUser.getAccessLvl() != AccessLvl.ADMIN) {
@@ -43,18 +48,6 @@ public class UserService {
 //        }
         return userRepository.save(user);
     }
-
-
-
-    public User check(AccessDto accessDto){
-        Optional<User> recordFound = userRepository.findByEmailAndPassword(accessDto.getEmail(), accessDto.getPassword());
-        if (recordFound.isPresent() && recordFound.get().getPassword().equals(accessDto.getPassword()) ) {
-            return recordFound.get();
-        }
-        return null;
-    }
-
-
 
     public User update(@NotNull @Positive Long id, @Valid User user){
         return userRepository.findById(id)

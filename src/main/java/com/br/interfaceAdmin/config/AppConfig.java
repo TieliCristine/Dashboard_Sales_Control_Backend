@@ -1,6 +1,7 @@
 package com.br.interfaceAdmin.config;
 
 import com.br.interfaceAdmin.model.entity.CompareCpfAndCnpj;
+import org.jetbrains.annotations.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +19,7 @@ public class AppConfig {
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
-            public void addCorsMappings(CorsRegistry registry) {
+            public void addCorsMappings(@NotNull CorsRegistry registry) {
                 registry.addMapping("/**").allowedMethods("*").allowedOrigins(corsOrigins);
             }
         };
@@ -33,4 +34,5 @@ public class AppConfig {
     public CompareCpfAndCnpj compareCpfAndCnpj() {
         return new CompareCpfAndCnpj();
     }
+
 }
